@@ -1,11 +1,10 @@
 # @jpodivin/pi-fireplace 🔥
 
+A cozy fireplace for the [pi coding agent](https://pi.dev) - animated flames with toggleable smoke, right in your terminal.
+
 This is mostly an exercise in making installable package for my coding agent.
 All credit for the idea should go to the creator of the original [emacs-fireplace](https://github.com/johanvts/emacs-fireplace/),
 Johan Sivertsen.
-
-A cozy fireplace for the [pi coding agent](https://pi.dev) - animated flames with toggleable smoke, right in your terminal.
-
 
 ## Features
 
