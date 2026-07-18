@@ -8,7 +8,8 @@
     "access": "public"
   },
   "scripts": {
-    "test": "tsx --test test.ts"
+    "test": "tsx --test test.ts",
+    "build": "tsc"
   },
   "keywords": [
     "pi-package",
