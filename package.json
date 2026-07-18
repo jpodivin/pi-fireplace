@@ -4,6 +4,9 @@
   "author": "Jiri Podivi <jpodivin@gmail.com>",
   "description": "A cozy fireplace for pi coding agent — animated flames, toggleable smoke",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "tsx --test test.ts"
   },
