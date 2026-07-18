@@ -31,7 +31,7 @@ jobs:
         run: pnpm run test
 
       - name: Build
-        run: pnpm run buil
+        run: pnpm run build
 
   # publish:
   #   needs: test
