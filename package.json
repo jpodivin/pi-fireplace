@@ -1,6 +1,6 @@
 {
   "name": "@jpodivin/pi-fireplace",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Jiri Podivi <jpodivin@gmail.com>",
   "description": "A cozy fireplace for pi coding agent — animated flames, toggleable smoke",
   "type": "module",

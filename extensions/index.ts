@@ -25,7 +25,7 @@ export const block = "\u2588";
  */
 
 // Default flame X positions (relative 0..1 across width) from original
-const DEFAULT_FLAME_POS = [0.5, 0.2, 0.8, 0.36, 0.64];
+const DEFAULT_FLAME_POS = [0.25, 0.36, 0.5, 0.64, 0.75];
 
 /** Pad a line with trailing spaces to reach width w. */
 function padLine(line: string, w: number): string {
@@ -303,9 +303,15 @@ class FireplaceComponent {
     // Each cell stores a colored string segment or plain space
     const grid: string[][] = Array.from({ length: gridH }, () => Array(gridW).fill(" "));
 
-    // Draw each flame (replicates fireplace--flame + fireplace--draw-flame-stripe)
+    // Height scale based on index: center flame is tallest,
+    // flames further from center are gradually shorter
+    const maxDist = this.flamePos.length / 2;
+
     for (let flameIndex = 0; flameIndex < this.flamePos.length; flameIndex++) {
-      this.drawFlame(flameIndex, flameWidthBase, gridW, gridH, grid);
+      const distFromCenter = Math.abs(flameIndex - (this.flamePos.length - 1) / 2);
+      const heightScale = 1.0 - (distFromCenter / maxDist) * 0.5;
+      const scaledBase = Math.max(2, Math.floor(flameWidthBase * heightScale));
+      this.drawFlame(flameIndex, scaledBase, gridW, gridH, grid);
     }
 
     // Convert grid rows to colored lines and box them
