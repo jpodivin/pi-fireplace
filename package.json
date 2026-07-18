@@ -1,11 +1,15 @@
 {
   "name": "@jpodivin/pi-fireplace",
-  "version": "0.2.0",
-  "author": "Jiri Podivi <jpodivin@gmail.com>",
+  "version": "0.2.1",
+  "author": "Jiri Podivin <jpodivin@gmail.com>",
   "description": "A cozy fireplace for pi coding agent — animated flames, toggleable smoke",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "test": "pnpm tsx --test test.ts"
+    "test": "tsx --test test.ts",
+    "build": "tsc"
   },
   "keywords": [
     "pi-package",

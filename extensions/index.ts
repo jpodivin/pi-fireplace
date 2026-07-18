@@ -1,4 +1,4 @@
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type { ExtensionAPI, ThemeColor } from "@earendil-works/pi-coding-agent";
 import { matchesKey, visibleWidth } from "@earendil-works/pi-tui";
 
 const TICK_MS = 250; // ~4 fps, smooth animation (overlay avoids flicker)
@@ -47,8 +47,8 @@ class FireplaceComponent {
 
   // Callbacks
   readonly #onClose: () => void;
-  readonly #theme: { fg: (style: string, text: string) => string };
-  readonly #tui: { requestRender: () => void; terminal: { rows: number; cols: number } };
+  readonly #theme: { fg: (color: ThemeColor, text: string) => string };
+  readonly #tui: { requestRender: () => void; terminal: { rows: number; columns: number } };
 
   // Caching
   #cachedLines: string[] = [];
@@ -72,8 +72,8 @@ class FireplaceComponent {
   }
 
   constructor(
-    tui: { requestRender: () => void; terminal: { rows: number; cols: number } },
-    theme: { fg: (style: string, text: string) => string },
+    tui: { requestRender: () => void; terminal: { rows: number; columns: number } },
+    theme: { fg: (color: ThemeColor, text: string) => string },
     onClose: () => void,
   ) {
     this.#tui = tui;
@@ -270,7 +270,7 @@ class FireplaceComponent {
 
     // Guard: terminal too small — return empty content so the TUI
     // overlay doesn't crash on a degenerate grid.
-    if (this.#tui.terminal.rows < 10 || this.#tui.terminal.cols < 20) {
+    if (this.#tui.terminal.rows < 10 || this.#tui.terminal.columns < 20) {
       this.#cachedLines = [];
       this.#cachedWidth = width;
       this.#cachedVersion = this.version;
@@ -365,10 +365,10 @@ export default function (pi: ExtensionAPI): void {
       try {
         await ctx.ui.custom((tui, theme, _kb, done) => {
           // Guard: terminal too small → shut down gracefully
-          if (tui.terminal.rows < 15 || tui.terminal.cols < 30) {
+          if (tui.terminal.rows < 15 || tui.terminal.columns < 30) {
             ctx.ui.notify("Terminal too small for fireplace", "warning");
             done(undefined);
-            return;
+            return { render: () => [], invalidate() {} };
           }
           return new FireplaceComponent(tui, theme, () => done(undefined));
         },

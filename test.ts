@@ -95,9 +95,10 @@ function makeComponent(): FireplaceComponent {
   const comp = new FireplaceComponent(
     {
       requestRender: () => {},
-      terminal: { rows: TERM_ROWS, cols: TERM_COLS },
+      terminal: { rows: TERM_ROWS, columns: TERM_COLS },
     },
     { fg: () => "" },
+    () => (undefined),
   );
   components.push(comp);
   return comp;
